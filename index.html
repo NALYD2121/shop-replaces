@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP REPLACE - Accueil</title>
+    <meta name="description" content="Découvrez notre collection de mods GTA V - Armes, Véhicules et Personnages personnalisés">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Préchargement des polices -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 1;
+            background: transparent !important;
+        }
+
+        /* Styles pour les contrôles vidéo */
+        .volume-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .volume-icon, .play-pause-icon {
+            color: #00f7ff;
+            cursor: pointer;
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .volume-icon:hover, .play-pause-icon:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(0, 247, 255, 0.2);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00f7ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00f7ff;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider:hover::-webkit-slider-thumb {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .volume-slider:hover::-moz-range-thumb {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+
+        .volume-control:hover {
+            border-color: rgba(0, 247, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 247, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="active">Accueil</a>
+        <a href="pages/armes.html">Armes</a>
+        <a href="pages/vehicules.html">Véhicules</a>
+        <a href="pages/personnages.html">Personnages</a>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">SHOP REPLACE</h1>
+            <p class="hero-subtitle">Découvrez notre collection de mods GTA V</p>
+            
+            <div class="category-grid">
+                <a href="pages/armes.html" class="category-card">
+                    <i class="fas fa-gun"></i>
+                    <h2>Armes</h2>
+                    <p>AWP, MM, M60, RPG et plus</p>
+                </a>
+                
+                <a href="pages/vehicules.html" class="category-card">
+                    <i class="fas fa-car"></i>
+                    <h2>Véhicules</h2>
+                    <p>Deluxo, OP, Scarab et plus</p>
+                </a>
+                
+                <a href="pages/personnages.html" class="category-card">
+                    <i class="fas fa-user"></i>
+                    <h2>Personnages</h2>
+                    <p>Skins et personnages personnalisés</p>
+                </a>
+            </div>
+
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-discord"></i>
+                    Rejoindre le Discord
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script différé pour améliorer le chargement -->
+    <script src="js/mods.js" defer></script>
+
+    <div class="video-background">
+        <video autoplay loop playsinline muted id="myVideo">
+            <source src="assets/videos/video1.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <!-- Contrôles vidéo -->
+    <div class="volume-control">
+        <i class="fas fa-pause play-pause-icon" id="playPauseIcon"></i>
+        <i class="fas fa-volume-mute volume-icon" id="volumeIcon"></i>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="0">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('myVideo');
+            const volumeSlider = document.getElementById('volumeSlider');
+            const volumeIcon = document.getElementById('volumeIcon');
+            const playPauseIcon = document.getElementById('playPauseIcon');
+            let lastVolume = 0.5;
+
+            // Gérer le changement de volume
+            volumeSlider.addEventListener('input', function() {
+                const volume = this.value / 100;
+                video.muted = false;
+                video.volume = volume;
+                lastVolume = volume;
+                updateVolumeIcon(volume);
+            });
+
+            // Gérer le clic sur l'icône du volume
+            volumeIcon.addEventListener('click', function() {
+                if (video.volume > 0 || video.muted) {
+                    lastVolume = video.volume;
+                    video.volume = 0;
+                    video.muted = true;
+                    volumeSlider.value = 0;
+                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                } else {
+                    video.muted = false;
+                    video.volume = lastVolume;
+                    volumeSlider.value = lastVolume * 100;
+                    updateVolumeIcon(lastVolume);
+                }
+            });
+
+            // Gérer le clic sur le bouton play/pause
+            playPauseIcon.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    playPauseIcon.className = 'fas fa-pause play-pause-icon';
+                } else {
+                    video.pause();
+                    playPauseIcon.className = 'fas fa-play play-pause-icon';
+                }
+            });
+
+            // Mettre à jour l'icône du volume
+            function updateVolumeIcon(volume) {
+                if (volume === 0 || video.muted) {
+                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                } else if (volume < 0.5) {
+                    volumeIcon.className = 'fas fa-volume-down volume-icon';
+                } else {
+                    volumeIcon.className = 'fas fa-volume-up volume-icon';
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
