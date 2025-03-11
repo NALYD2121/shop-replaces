@@ -232,22 +232,34 @@ function displayMods(mods) {
         const description = cleanDisplayText(mod.description) || 'Aucune description disponible';
         const imageUrl = mod.image || 'assets/default-mod.jpg';
         
-        // Vérification et nettoyage du lien de téléchargement
-        let downloadLink = mod.downloadLink;
+        // Récupération de l'ID du canal Discord
+        console.log("Nom du mod avant nettoyage:", name);
+        // Nettoyer le nom pour correspondre au format dans CHANNEL_IDS
+        const cleanedName = name.replace(/```diff\n\+ /g, '')
+                              .replace(/```/g, '')
+                              .replace(/\+ /g, '')
+                              .trim();
+        console.log("Nom du mod après nettoyage:", cleanedName);
+        
+        const discordChannelId = CHANNEL_IDS[currentCategory][cleanedName] || '';
+        console.log("ID du canal trouvé:", discordChannelId, "pour la catégorie:", currentCategory);
+        
+        const discordButton = discordChannelId 
+            ? `<a href="https://discord.gg/rgBCtthN" class="discord-btn" target="_blank" rel="noopener noreferrer">
+                 <i class="fab fa-discord"></i> Discord
+               </a>`
+            : `<button class="discord-btn disabled" disabled>
+                 <i class="fab fa-discord"></i> Discord indisponible
+               </button>`;
+
+        const downloadLink = mod.downloadLink;
         if (!downloadLink || downloadLink === '#') {
             console.warn(`Lien de téléchargement manquant pour le mod: ${name}`);
         }
-        // S'assurer que le lien est un lien MediaFire valide
         if (downloadLink && !downloadLink.includes('mediafire.com')) {
             console.warn(`Lien non-MediaFire détecté pour le mod: ${name}`);
         }
 
-        const modCard = document.createElement('div');
-        modCard.className = 'mod-card';
-        
-        const imageContainer = document.createElement('div');
-        imageContainer.className = 'mod-image-container';
-        
         const downloadButton = downloadLink && downloadLink !== '#' 
             ? `<a href="${downloadLink}" class="download-btn" target="_blank" rel="noopener noreferrer">
                  <i class="fas fa-download"></i> Télécharger
@@ -256,6 +268,12 @@ function displayMods(mods) {
                  <i class="fas fa-exclamation-circle"></i> Lien indisponible
                </button>`;
 
+        const modCard = document.createElement('div');
+        modCard.className = 'mod-card';
+        
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'mod-image-container';
+        
         imageContainer.innerHTML = `
             <img src="${imageUrl}" alt="${name}" class="mod-image">
             <div class="mod-overlay">
@@ -264,9 +282,7 @@ function displayMods(mods) {
                         <i class="fas fa-search-plus"></i> Voir l'image
                     </button>
                     ${downloadButton}
-                    <a href="https://discord.com/channels/${mod.channelId}" class="discord-btn" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-discord"></i> Discord
-                    </a>
+                    ${discordButton}
                 </div>
             </div>
         `;
