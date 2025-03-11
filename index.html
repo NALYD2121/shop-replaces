@@ -10,6 +10,34 @@
     <!-- Préchargement des polices -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <style>
+        /* Désactiver le défilement sur la page d'index */
+        body {
+            overflow: hidden;
+        }
+
+        /* Style pour la barre de navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00f7ff;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
+        nav a.active {
+            color: #00f7ff;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+
         .video-background {
             position: fixed;
             top: 0;
@@ -158,9 +186,13 @@
             </div>
 
             <div class="social-links">
-                <a href="https://discord.gg/zddBAABhQH" class="social-link" target="_blank">
+                <a href="https://discord.gg/shop-replaces" target="_blank" class="social-link">
                     <i class="fab fa-discord"></i>
                     Rejoindre le Discord
+                </a>
+                <a href="https://www.youtube.com/@shop-replaces" target="_blank" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                    Rejoindre YouTube
                 </a>
             </div>
         </div>
