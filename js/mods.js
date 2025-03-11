@@ -1,5 +1,5 @@
 // Configuration
-const API_URL = 'http://localhost:3000/api';
+const API_URL = window.API_URL || 'https://cb4dfe0d-220b-4edd-a87c-0d30661b7aaf-00-23bw0eqpwil9w.picard.replit.dev/api';
 const CHANNEL_IDS = {
     ARME: {
         'AWP MK2': '1339958173125050422',
@@ -421,7 +421,11 @@ function showLoading(show) {
 }
 
 function showError(message) {
-    const container = document.querySelector('.mod-list');
+    const container = document.getElementById('mods-container');
+    if (!container) {
+        console.error('Container des mods non trouvé');
+        return;
+    }
     container.innerHTML = `
         <div class="error-message">
             <i class="fas fa-exclamation-circle"></i>
