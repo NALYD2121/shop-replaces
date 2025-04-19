@@ -13,11 +13,12 @@
         /* Désactiver le défilement sur la page d'index */
         body {
             overflow: hidden;
+            background: transparent;
         }
 
         /* Style pour la barre de navigation */
         nav {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 247, 255, 0.1);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -66,7 +67,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.05);
             z-index: -1;
         }
 
@@ -150,10 +151,31 @@
             border-color: rgba(0, 247, 255, 0.3);
             box-shadow: 0 0 15px rgba(0, 247, 255, 0.1);
         }
+
+        /* Style pour la barre de navigation */
+        .background-logo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: auto;
+            opacity: 0.15;
+            z-index: -1;
+        }
     </style>
 </head>
-<body>
+<body class="index-page">
+    <!-- Conteneur de particules -->
+    <div id="particles-js"></div>
+    
+    <!-- Logo en arrière-plan -->
+    <img src="assets/images/logo1.png" alt="" class="background-logo">
+
     <nav>
+        <a href="#top" class="logo-link">
+            <img src="assets/images/logo1.png" alt="Logo Shop Replace" class="logo">
+        </a>
         <a href="index.html" class="active">Accueil</a>
         <a href="pages/armes.html">Armes</a>
         <a href="pages/vehicules.html">Véhicules</a>
@@ -186,11 +208,11 @@
             </div>
 
             <div class="social-links">
-                <a href="https://discord.gg/shop-replaces" target="_blank" class="social-link">
+                <a href="https://discord.gg/fRG26KyHw7" target="_blank" class="social-link">
                     <i class="fab fa-discord"></i>
                     Rejoindre le Discord
                 </a>
-                <a href="https://www.youtube.com/@shop-replaces" target="_blank" class="social-link">
+                <a href="https://www.youtube.com/@nalyd7434" target="_blank" class="social-link">
                     <i class="fab fa-youtube"></i>
                     Rejoindre YouTube
                 </a>
@@ -207,7 +229,6 @@
             <source src="assets/videos/video1.mp4" type="video/mp4">
             Votre navigateur ne supporte pas la lecture de vidéos.
         </video>
-        <div class="video-overlay"></div>
     </div>
 
     <!-- Contrôles vidéo -->
